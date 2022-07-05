@@ -1,0 +1,27 @@
+﻿@{
+    ViewData["Title"] = "ShowTelemetry";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <div class="row">
+        <table id="telemetryTable">
+            <thead>
+                <tr>
+                    <th>Rocket System Id</th>
+                    <th>Altitude</th>
+                    <th>Speed</th>
+                    <th>Acceleration</th>
+                    <th>Thrust</th>
+                    <th>Temperature</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+        <ul id="messagesList"></ul>
+    </div>
+</div>
+
+<script src="~/lib/microsoft/signalr/dist/browser/signalr.js"></script>
+<script src="~/js/telemetrylistener.js"></script>

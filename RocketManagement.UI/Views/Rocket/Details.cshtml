@@ -1,0 +1,150 @@
+﻿@using RocketManagement.Application.Features.Rocket.Dtos
+@model RocketDto
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@await Html.PartialAsync("~/Views/Shared/PartialViews/Message.cshtml")
+
+<br />
+
+<div>
+    @(await Component.InvokeAsync("Weather"))
+</div>
+
+<form method="post" action="">
+
+    <div class="card">
+        <div class="card-header">
+            Rocket Information
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-sm-2 border border-secondary">Rocket Id</div>
+                <div class="col-sm-2 border border-secondary">
+                    @Html.DisplayFor(model => model.Id)
+                    @Html.HiddenFor(model => model.Id)
+                </div>
+
+                <div class="col-sm-2 border border-secondary">Rocket Model</div>
+                <div class="col-sm-2 border border-secondary"> @Html.DisplayFor(model => model.RocketModel)</div>
+
+                <div class="col-sm-2 border border-secondary">Status</div>
+                <div class="col-sm-2 border border-secondary">
+                    @Html.DisplayFor(model => model.Status)
+                    @Html.HiddenFor(model => model.Status)
+                </div>
+                <div class="col-sm-2 border border-secondary">Mass</div>
+                <div class="col-sm-2 border border-secondary">
+                    @Html.DisplayFor(model => model.Mass)
+                    @Html.HiddenFor(model => model.Mass)
+                </div>
+
+                <div class="col-sm-2 border border-secondary">Altitude</div>
+                <div class="col-sm-2 border border-secondary">
+                    @Html.DisplayFor(model => model.Altitude)
+                    @Html.HiddenFor(model => model.Altitude)
+                </div>
+
+                <div class="col-sm-2 border border-secondary">Speed</div>
+                <div class="col-sm-2 border border-secondary">
+                    @Html.DisplayFor(model => model.Speed)
+                    @Html.HiddenFor(model => model.Speed)
+                </div>
+                <div class="col-sm-2 border border-secondary">Acceleration</div>
+                <div class="col-sm-2 border border-secondary">
+                    @Html.DisplayFor(model => model.Acceleration)
+                    @Html.HiddenFor(model => model.Acceleration)
+                </div>
+
+                <div class="col-sm-2 border border-secondary">Thrust</div>
+                <div class="col-sm-2 border border-secondary">
+                    @Html.DisplayFor(model => model.Thrust)
+                    @Html.HiddenFor(model => model.Thrust)
+                </div>
+
+                <div class="col-sm-2 border border-secondary">Temperature</div>
+                <div class="col-sm-2 border border-secondary">
+                    @Html.DisplayFor(model => model.Temperature)
+                    @Html.HiddenFor(model => model.Temperature)
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header">
+            Payload
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-sm-6 border border-secondary">Description</div>
+                <div class="col-sm-6 border border-secondary"> @Html.DisplayFor(model => model.Payload.Description)</div>
+                <div class="col-sm-6 border border-secondary">Weight</div>
+                <div class="col-sm-6 border border-secondary"> @Html.DisplayFor(model => model.Payload.Weight)</div>
+            </div>
+        </div>
+    </div>
+
+    <br />
+
+    <div class="card">
+        <div class="card-header">
+            Telemetery
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-sm-6 border border-secondary">Host</div>
+                <div class="col-sm-6 border border-secondary"> @Html.DisplayFor(model => model.Telemetry.Host)</div>
+                <div class="col-sm-6 border border-secondary">Port</div>
+                <div class="col-sm-6 border border-secondary"> @Html.DisplayFor(model => model.Telemetry.Port)</div>
+            </div>
+        </div>
+    </div>
+
+    <br />
+
+    <div class="card">
+        <div class="card-header">
+            Time stamps
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-sm-3 border border-secondary">Launched Time</div>
+                <div class="col-sm-3 border border-secondary">@Html.DisplayFor(model => model.Timestamps.Launched)</div>
+                <div class="col-sm-3 border border-secondary">Deployed Time</div>
+                <div class="col-sm-3 border border-secondary">@Html.DisplayFor(model => model.Timestamps.Deployed)</div>
+                <div class="col-sm-3 border border-secondary">Failed Time</div>
+                <div class="col-sm-3 border border-secondary">@Html.DisplayFor(model => model.Timestamps.Failed)</div>
+                <div class="col-sm-3 border border-secondary">Cancelled Time</div>
+                <div class="col-sm-3 border border-secondary">@Html.DisplayFor(model => model.Timestamps.Cancelled)</div>
+            </div>
+        </div>
+    </div>
+
+    <br />
+
+    <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+
+        <a href='@Url.Action("ShowTelemetry", "Rocket",new { id=Model.Id })'>
+            <input type='button' value='Show Telemetry' class="btn btn-primary" />
+        </a>
+
+        <div class="btn-group" role="group">
+            <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                Commands
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                <li> <input type="submit" value="Launch" asp-action="Launch" class="dropdown-item" /></li>
+                <li> <input type="submit" value="Deploy" asp-action="Deploy" class="dropdown-item" /></li>
+                <li> <input type="submit" value="Cancel Launch" asp-action="CancelLaunch" class="dropdown-item" /></li>
+            </ul>
+        </div>
+
+        <a href='@Url.Action("Index", "Rocket")'>
+            <input type='button' value='Back To Rocket List' class="btn btn-primary" />
+        </a>
+    </div>
+</form>
